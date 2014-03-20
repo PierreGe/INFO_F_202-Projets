@@ -1,0 +1,110 @@
+-------- Problème de base --------
+
+--> Test :construction tableau valeur / taille template
+ 6.1 0 0 0 0 0
+
+--> Test :construction tableau pointeur / taille template
+ 0 40 0 0 0 0
+
+--> Test :construction tableau valeur / taille construction
+ 0 0 8 0 0 0
+
+--> Test :construction tableau pointeur / taille construction
+ 0 0 0 9 0 0
+
+--> Test :type de base est un pointeur
+impression des pointeurs :
+ 0x100203a30 0x100203a50 0x100203a40 0x100203a30 0x100203a50 0x100203a40
+impression des pointeurs :
+ 0x100203a60 0x100203a60 0x100203a70 0x100203a70 0x100203a80 0x100203a80
+
+--> Test : Assignation
+Si mauvaise taille ?
+Erreur : taille incohérente
+Independant ? (valeur en indice 0)
+ 6 0 0 0 0 0 != 2 0 0 0 0 0
+
+--> Test : Constructeur de copie
+Independant ?
+ 6 0 0 0 0 0 == 6 0 0 0 0 0 == 6 0 0 0 0 0 != 2 0 0 0 0 0
+Independant ?
+ 0 40 0 0 0 0 == 0 40 0 0 0 0 == 0 40 0 0 0 0 != 2 40 0 0 0 0
+
+--> Test : op Transfert
+ 2 40 0 0 0 0
+ 0 0 0 0 0 0
+
+--> Test : Constructeur de Transfert
+ 2 40 0 0 0 0
+ 0 0 0 0 0 0
+
+--> Test : Destructeur
+test avec valgrind --tool=memcheck --leak-check=full ./main
+==37701== 
+==37701== HEAP SUMMARY:
+==37701==     in use at exit: 0 bytes in 0 blocks
+==37701==   total heap usage: 176 allocs, 176 frees, 2,353 bytes allocated
+==37701== 
+==37701== All heap blocks were freed -- no leaks are possible
+==37701== 
+==37701== For counts of detected and suppressed errors, rerun with: -v
+==37701== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)
+
+--> Test : cin
+Entrez une array de int avec un retour de ligne \n a la fin de taille  4
+5 6 \n
+Erreur dans l'input : taille incohérente
+5 6 7 8\n
+ 5 6 7 8
+-------- Premier problème complémentaire --------
+
+--> Test op+ 
+ 5 4 3 7
+
+--> Test op- 
+ 7 7 3 5
+
+--> Test op+= 
+ 7 7 3 5
++= -1 -2 -1 -4
+ 6 5 2 1
+
+--> Test op-= 
+ 6 5 2 1
+-= -1 -2 -1 -4
+ 7 7 3 5
+
+--> Test op+ 
+ -1 -2 -1 -4
++ 7 7 3 5
+ 7 7 3 5== 7 7 3 5== 7 7 3 5
+ 6 5 2 1
+
+--> Test op* scalaire * array 
+8   * -1 -2 -1 -4
+ -1 -2 -1 -4
+ -8 -16 -8 -32
+
+--> Test op* array * scalaire 
+ -1 -2 -1 -4  * 6
+ -6 -12 -6 -24
+
+--> Test op- 
+ -1 -2 -1 -4
+-  -6 -12 -6 -24
+ 5 10 5 20
+-------- Deuxième problème complémentaire --------
+
+--> Test avec char
+ c + +
+ c + +
+
+--> Test avec string
+ INFO F 202
+ INFO F 202
+
+--> Test avec char*
+ Langages de programmation
+ Langages de programmation
+ Langages de programmation
+ Langages de programmation
